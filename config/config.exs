@@ -7,7 +7,8 @@ use Mix.Config
 
 # General application configuration
 config :vote,
-  ecto_repos: [Vote.Repo]
+  ecto_repos: [Vote.Repo],
+  generators: [binary_id: true]
 
 # Configures the endpoint
 config :vote, VoteWeb.Endpoint,

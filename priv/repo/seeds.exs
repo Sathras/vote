@@ -1,11 +1,9 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     Vote.Repo.insert!(%Vote.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+# Vote.Repo.delete_all Vote.Coherence.User
+
+# Vote.Coherence.User.changeset(%Vote.Coherence.User{}, %{
+#   name: "Alex", 
+#   email: "alex@fuchsberger.us", 
+#   password: "password", 
+#   password_confirmation: "password"
+# })
+# |> Vote.Repo.insert!

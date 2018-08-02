@@ -3,7 +3,24 @@ defmodule VoteWeb.ErrorHelpers do
   Conveniences for translating and building error messages.
   """
 
+  import Phoenix.Controller, only: [get_flash: 2]
   use Phoenix.HTML
+
+  @doc """
+  Generates alert boxes for info or error messages coming from flash memory
+  """
+  def flash_alerts(conn) do
+    error = get_flash(conn, :error)
+    info = get_flash(conn, :info)
+    cond do
+      error ->
+        content_tag(:p, error, class: "alert alert-danger", role: "alert")
+      info ->
+        content_tag(:p, info, class: "alert alert-info", role: "alert")
+      true ->
+        nil
+    end
+  end
 
   @doc """
   Generates tag for inlined form input errors.
