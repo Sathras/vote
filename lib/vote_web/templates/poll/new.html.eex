@@ -1,0 +1,12 @@
+<div class="card bg-light mx-auto mt-3" style="max-width: 24rem;">
+  <img class="card-img-top" src="images/bucknell.jpg" />
+  <div class="card-body">
+    <h5 class="card-title">When was Bucknell university founded?</h5>
+  </div>
+  <%= form_for @conn, poll_path(@conn, :create), fn f -> %>
+    <%= option 1, 1846, @selected %>
+    <%= option 2, 1848, @selected %>
+    <%= option 3, 1851, @selected %>
+    <%= option 4, 1853, @selected %>
+  <% end %>
+</div>

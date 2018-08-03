@@ -1,9 +1,7 @@
-# Vote.Repo.delete_all Vote.Coherence.User
+alias Vote.Accounts.Credential
 
-# Vote.Coherence.User.changeset(%Vote.Coherence.User{}, %{
-#   name: "Alex", 
-#   email: "alex@fuchsberger.us", 
-#   password: "password", 
-#   password_confirmation: "password"
-# })
-# |> Vote.Repo.insert!
+Credential.changeset(%Credential{}, %{ 
+  email: "alex@fuchsberger.us",  
+  password: "password"
+}) 
+|> Vote.Repo.insert!

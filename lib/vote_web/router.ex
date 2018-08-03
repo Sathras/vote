@@ -11,9 +11,17 @@ defmodule VoteWeb.Router do
   end
 
   scope "/", VoteWeb do
+
     pipe_through :browser
-    get "/", PageController, :index
-    post "/", AuthController, :create
-    delete "/", AuthController, :delete
+
+    # Base Functionality
+    get     "/", PollController, :home
+    post    "/", AuthController, :create
+    delete  "/", AuthController, :delete
+
+    # Poll Functionality
+    get     "/results", PollController, :index
+    get     "/vote",    PollController, :new
+    post    "/vote",    PollController, :create
   end
 end

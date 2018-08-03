@@ -1,29 +1,37 @@
 defmodule VoteWeb.LayoutView do
   use VoteWeb, :view
-  # import Phoenix.Controller, only: [current_path: 2]
+  import Phoenix.Controller, only: [current_path: 2]
 
   @type conn :: Plug.Conn.t
 
   @signin_link dgettext("menu", "Sign In")
   @signout_link  dgettext("menu", "Sign Out")
-  # @vote_link  dgettext("menu", "Vote")
+  @vote_link  dgettext("menu", "Change Vote")
  
   @doc """
   Creates all the menu links.
   """
   @spec menu_links(conn) :: tuple
   def menu_links(conn) do
-    if authenticated?(conn) do
-      link @signout_link, 
-        class: "nav-link",
-        method: :delete,
-        to: auth_path(conn, :delete)
+    auth_link = if authenticated?(conn) do
+        link @signout_link, 
+          class: "nav-link",
+          method: :delete,
+          to: auth_path(conn, :delete)
+      else
+        link @signin_link, 
+          class: "nav-link",
+          data_toggle: "modal",
+          data_target: "#loginModal",
+          to: "#"
+      end
+    if current_path(conn, %{}) === poll_path(conn, :index) do
+      [
+        link(@vote_link, class: "nav-link", to: poll_path(conn, :new)),
+        auth_link
+      ]
     else
-      link @signin_link, 
-        class: "nav-link",
-        data_toggle: "modal",
-        data_target: "#loginModal",
-        to: "#"
+      auth_link
     end
   end
 
