@@ -5,7 +5,7 @@ defmodule VoteWeb.PollController do
   plug :authenticate_user when action in [:delete]
 
   def home(conn, _params) do
-    case Poll.get_vote_by_session_key(session_key(conn)) do
+    case vote(conn) do
       nil -> redirect conn, to: poll_path(conn, :new)
       _vote -> redirect conn, to: poll_path(conn, :index)
     end    
@@ -31,11 +31,7 @@ defmodule VoteWeb.PollController do
   end
 
   def new(conn, _params) do
-    selected = case Poll.get_vote_by_session_key(session_key(conn)) do
-      nil -> nil
-      vote -> vote.option
-    end
-    render conn, "new.html", selected: selected
+    render conn, "new.html", selected: vote(conn)
   end
 
   def delete(conn, _params) do
@@ -44,4 +40,14 @@ defmodule VoteWeb.PollController do
   end
 
   defp session_key(conn), do: Map.get(conn.req_cookies, "_vote_key")
+
+  defp vote(conn) do
+    key = session_key(conn)
+    if is_nil(key) do
+      nil
+    else 
+      vote = Poll.get_vote_by_session_key(key)
+      if is_nil(vote), do: nil, else: Map.get(vote, :option)
+    end
+  end
 end
