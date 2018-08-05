@@ -1,7 +1,7 @@
 <div class="card bg-light mx-auto mt-3" style="max-width: 24rem;">
   <img class="card-img-top" src="images/bucknell.jpg" />
   <div class="card-body">
-    <h5 class="card-title">When was Bucknell university founded?</h5>
+    <h5 class="card-title text-center">When was Bucknell University founded?</h5>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
@@ -54,4 +54,3 @@
     </li>
   </ul>
 </div>
-<%= IO.inspect @votes %>

@@ -23,6 +23,7 @@ defmodule VoteWeb do
       import Plug.Conn
       import VoteWeb.Router.Helpers
       import VoteWeb.Gettext
+      import VoteWeb.Auth, only: [authenticate_user: 2]
     end
   end
 
@@ -49,6 +50,7 @@ defmodule VoteWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
+      import VoteWeb.Auth, only: [authenticate_user: 2]
     end
   end
 

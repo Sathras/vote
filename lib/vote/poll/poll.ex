@@ -10,12 +10,6 @@ defmodule Vote.Poll do
 
   @doc """
   Returns the list of votes.
-
-  ## Examples
-
-      iex> list_votes()
-      [%Vote{}, ...]
-
   """
   def list_votes do
     Repo.all(from v in Vote, select: v.option)
@@ -41,31 +35,9 @@ defmodule Vote.Poll do
   end
 
   @doc """
-  Deletes a Vote.
-
-  ## Examples
-
-      iex> delete_vote(vote)
-      {:ok, %Vote{}}
-
-      iex> delete_vote(vote)
-      {:error, %Ecto.Changeset{}}
-
+  Deletes all Vote.
   """
-  def delete_vote(%Vote{} = vote) do
-    Repo.delete(vote)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking vote changes.
-
-  ## Examples
-
-      iex> change_vote(vote)
-      %Ecto.Changeset{source: %Vote{}}
-
-  """
-  def change_vote(%Vote{} = vote) do
-    Vote.changeset(vote, %{})
+  def reset() do
+    Repo.delete_all(Vote)
   end
 end

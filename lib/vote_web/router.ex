@@ -23,5 +23,6 @@ defmodule VoteWeb.Router do
     get     "/results", PollController, :index
     get     "/vote",    PollController, :new
     post    "/vote",    PollController, :create
+    delete  "/results", PollController, :delete
   end
 end

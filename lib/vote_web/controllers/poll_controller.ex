@@ -1,9 +1,8 @@
 defmodule VoteWeb.PollController do
   use VoteWeb, :controller
-
   alias Vote.Poll
 
-  # plug :authenticate when action in [:edit]
+  plug :authenticate_user when action in [:delete]
 
   def home(conn, _params) do
     case Poll.get_vote_by_session_key(session_key(conn)) do
@@ -39,16 +38,10 @@ defmodule VoteWeb.PollController do
     render conn, "new.html", selected: selected
   end
 
-  defp session_key(conn), do: Map.get(conn.req_cookies, "_vote_key")
+  def delete(conn, _params) do
+    Poll.reset()
+    redirect conn, to: poll_path(conn, :new)
+  end
 
-  # defp authenticate(conn, _opts) do
-  #   if conn.assigns.current_user do
-  #     conn
-  #   else
-  #     conn
-  #     |> put_flash(:error, "You must be logged in to access that page")
-  #     |> redirect(to: page_path(conn, :vote))
-  #     |> halt()
-  #   end
-  # end
+  defp session_key(conn), do: Map.get(conn.req_cookies, "_vote_key")
 end

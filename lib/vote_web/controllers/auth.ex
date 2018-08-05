@@ -1,12 +1,25 @@
 defmodule VoteWeb.Auth do
 
   import Plug.Conn
+  import Phoenix.Controller
+  alias VoteWeb.Router.Helpers, as: Routes
   alias Vote.Accounts
 
   def init(opts), do: opts
 
   def call(conn, _opts) do
     assign(conn, :current_user, get_session(conn, :user_id))
+  end
+
+  def authenticate_user(conn, _opts) do
+    if conn.assigns.current_user do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You must be logged in.")
+      |> redirect(to: Routes.poll_path(conn, :index))
+      |> halt()
+    end
   end
 
   def login(conn, credential) do

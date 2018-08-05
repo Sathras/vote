@@ -3,7 +3,7 @@ defmodule VoteWeb.ErrorHelpers do
   Conveniences for translating and building error messages.
   """
 
-  import Phoenix.Controller, only: [get_flash: 2]
+  import Phoenix.Controller, only: [render: 3, get_flash: 2]
   use Phoenix.HTML
 
   @doc """
@@ -12,13 +12,11 @@ defmodule VoteWeb.ErrorHelpers do
   def flash_alerts(conn) do
     error = get_flash(conn, :error)
     info = get_flash(conn, :info)
+
     cond do
-      error ->
-        content_tag(:p, error, class: "alert alert-danger", role: "alert")
-      info ->
-        content_tag(:p, info, class: "alert alert-info", role: "alert")
-      true ->
-        nil
+      error -> render(conn, "alert.html", text: error, style: "danger")
+      info -> render(conn, "alert.html", text: info, style: "info")
+      true -> nil
     end
   end
 

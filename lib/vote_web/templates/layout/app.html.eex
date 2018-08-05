@@ -13,10 +13,11 @@
 
   <body>
     <div class="container">
-      <%= flash_alerts(@conn) %>
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+      <%= render "alert.html", 
+        error: get_flash(@conn, :error), 
+        info: get_flash(@conn, :info) 
+      %>
+      <main role="main"><%= render @view_module, @view_template, assigns %></main>
       <nav class="nav nav-pills justify-content-center">
         <%= menu_links(@conn) %>
       </nav>

@@ -1,3 +1,12 @@
+.sized {
+  max-width: 24rem;
+}
+
 .text-underline {
   text-decoration: underline;
+}
+
+.list-group-item-action {
+  cursor: pointer;
+  text-align: center;
 }
