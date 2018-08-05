@@ -32,7 +32,7 @@ config :vote, Vote.Repo,
   username: System.get_env("DB_USERNAME"),
   password: System.get_env("DB_PASSWORD"),
   database: "vote_prod",
-  pool_size: 20
+  pool_size: 1
 
 # This line appears further down. Do not forget to uncomment it!
 config :phoenix, :serve_endpoints, true
