@@ -38,8 +38,8 @@ defmodule VoteWeb.LayoutView do
   end
 
   defp reset_link(conn) do
-    # if results_page?(conn) do
-    if results_page?(conn) && authenticated?(conn) do
+    if results_page?(conn) do
+    # if results_page?(conn) && authenticated?(conn) do
       link @reset_link, 
         class: @class, 
         method: :delete,
